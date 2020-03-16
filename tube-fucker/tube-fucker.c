@@ -1,7 +1,10 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include <math.h>
 #include "lv2/lv2plug.in/ns/lv2core/lv2.h"
+
 #define PLUGIN_URI "http://return0.info/plugins/tube-fucker"
+
 typedef enum {
     PEDAL_GAIN   = 0,
     PEDAL_VOL    = 1,
@@ -16,19 +19,7 @@ typedef struct {
     float* output;
 } TubeFucker ;
 
-float apply(const TubeFucker* pedal, const float a) {
-    float d = (a + powf(a, 3)) * powf(40.0f, (*pedal->gain) * 0.05f) * 10.0f;
-    if (d > 1) {
-        d = 2.0f/3.0f;
-    } else if (d < -1) {
-        d = -2.0f/3.0f;
-    } else {
-        d = d - powf(d, 3)/ 3;
-    }
-    d = d / 10.0f;
-    return d * powf(10.0f, (*(pedal->volume)) * 0.05f);
-}
-
+float apply(const TubeFucker* pedal, const float a);
 
 static LV2_Handle instantiate(
     const LV2_Descriptor*     descriptor,
@@ -39,8 +30,7 @@ static LV2_Handle instantiate(
     return instance;
 }
 
-static void
-connect_port(LV2_Handle instance,
+static void connect_port(LV2_Handle instance,
              uint32_t   port,
              void*      data)
 {
@@ -106,3 +96,17 @@ LV2_SYMBOL_EXPORT const LV2_Descriptor* lv2_descriptor(uint32_t index)
         default: return NULL;
         }
 }
+
+float apply(const TubeFucker* pedal, const float a) {
+    float d = (a + powf(a, 3)) * powf(40.0f, (*pedal->gain) * 0.05f) * 10.0f;
+    if (d > 1) {
+        d = 2.0f/3.0f;
+    } else if (d < -1) {
+        d = -2.0f/3.0f;
+    } else {
+        d = d - powf(d, 3)/ 3;
+    }
+    d = d / 10.0f;
+    return d * powf(10.0f, (*(pedal->volume)) * 0.05f);
+}
+
