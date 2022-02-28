@@ -19,7 +19,7 @@ tube-fucker.so: tube-fucker.c
 	gcc -shared -fPIC -DPIC tube-fucker.c -DLV2_VERSION="1.18.2" -DHAVE_LV2=1 -I/opt/include  -o tube-fucker.so
 
 tube-fucker.dll: tube-fucker.c
-	/usr/lib/mxe/usr/bin/x86_64-w64-mingw32.static-gcc  -DLV2_VERSION="1.18.2" -DHAVE_LV2=1 -I/opt/include  -std=c99 -o tube-fucker.dll  -shared  tube-fucker.c
+	x86_64-w64-mingw32.static-gcc  -DLV2_VERSION="1.18.2" -DHAVE_LV2=1 -I/opt/include  -std=c99 -o tube-fucker.dll  -shared  tube-fucker.c
 
 all: $(LINUX_BUNDLE) $(WINDOWS_BUNDLE)
 
