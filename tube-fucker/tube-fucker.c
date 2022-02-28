@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include "lv2/lv2plug.in/ns/lv2core/lv2.h"
+#include <lv2/lv2plug.in/ns/lv2core/lv2.h>
 
 #define PLUGIN_URI "http://return0.info/plugins/tube-fucker"
 
